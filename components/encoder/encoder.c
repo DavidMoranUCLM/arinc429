@@ -32,6 +32,14 @@ static bool updateOutputs(encoder_t* encoder) {
   return false;
 }
 
+static uint8_t getReversedLabel(uint8_t label) {
+  uint8_t reversedLabel = 0;
+  for (int i = 0; i < 8; i++) {
+    reversedLabel |= ((label >> i) & 1) << (7 - i);
+  }
+}
+  
+
 static uint32_t getTrace(encoder_t* encoder) {
   union {
     uint32_t trace;
@@ -44,7 +52,7 @@ static uint32_t getTrace(encoder_t* encoder) {
     } fields;
   } u;
 
-  u.fields.label = encoder->internal.label;
+  u.fields.label = getReversedLabel(encoder->internal.label);
   u.fields.sdi = encoder->internal.sdi;
   u.fields.ssm = encoder->internal.ssm;
   u.fields.headingBCD = encoder->internal.headingBCD;
