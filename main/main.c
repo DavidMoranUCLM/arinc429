@@ -78,13 +78,13 @@ void app_main(void) {
   task_fsm_data_t encoder_data = {.encoder_fsm = (fsm_t*)encoder_fsm,
                                   .transciever_fsm = NULL,
                                   .clk = &active,
-                                  .period = pdMS_TO_TICKS(100)};
+                                  .period = pdMS_TO_TICKS(10000)};
 
   task_fsm_data_t transciever_data = {
       .encoder_fsm = NULL,
       .transciever_fsm = (fsm_t*)transciever_fsm,
       .clk = NULL,
-      .period = pdMS_TO_TICKS(1)};
+      .period = pdMS_TO_TICKS(1000)};
 
   task_heading_data_t data3 = {
       .clk = &active, .heading = &heading, .period = pdMS_TO_TICKS(2000)};
